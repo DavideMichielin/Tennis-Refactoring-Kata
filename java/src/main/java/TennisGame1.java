@@ -11,14 +11,14 @@ public class TennisGame1 implements TennisGame {
         this.player2Name = player2Name;
     }
 
-    public void wonPoint(String playerName) {
+    public void addSetPointToAPlayer(String playerName) {
         if (playerName == "player1")
             m_score1 += 1;
         else
             m_score2 += 1;
     }
 
-    public String getScore() {
+    public String showScoreoftheMatch() {
         String score = "";
         int tempScore=0;
         if (m_score1==m_score2)
