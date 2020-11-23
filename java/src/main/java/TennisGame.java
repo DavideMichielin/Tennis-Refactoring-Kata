@@ -1,5 +1,5 @@
 
 public interface TennisGame {
-    void addSetPointToAPlayer(String playerName);
+    void addSetToAPlayer(String playerName);
     String showScoreoftheMatch();
 }

@@ -25,7 +25,7 @@ public class TennisGame3 implements TennisGame {
         }
     }
     
-    public void addSetPointToAPlayer(String playerName) {
+    public void addSetToAPlayer(String playerName) {
         if (playerName == "player1")
             this.p1 += 1;
         else
