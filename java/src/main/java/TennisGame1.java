@@ -1,8 +1,8 @@
 
 public class TennisGame1 implements TennisGame {
 
-    private int scorePlayer1 = 0;
-    private int scorePlayer2 = 0;
+    private int pointPlayer1 = 0;
+    private int pointPlayer2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -11,64 +11,47 @@ public class TennisGame1 implements TennisGame {
         this.player2Name = player2Name;
     }
 
-    public void addSetToAPlayer(String playerName) {
+    public void addPointToAPlayer(String playerName) {
         if (playerName == "player1")
-            scorePlayer1 += 1;
+            pointPlayer1 += 1;
         else
-            scorePlayer2 += 1;
+            pointPlayer2 += 1;
     }
 
-    public String showScoreoftheMatch() {
+    public String showScoreOfTheMatch() {
         String score = "";
-        int tempScore = 0;
-        if (equalScore(scorePlayer1, scorePlayer2)) {
-            score = SetPointDraw();
+        if (equalScore(pointPlayer1, pointPlayer2)) {
+            if (pointPlayer1 > 2) {
+                score = "Deuce";
+            } else {
+                score = setScore(pointPlayer1) + "-All";
+            }
         } else if (advantageOrWin()) {
-            int minusResult = scorePlayer1 - scorePlayer2;
+            int minusResult = pointPlayer1 - pointPlayer2;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
             else if (minusResult >= 2) score = "Win for player1";
             else score = "Win for player2";
         } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = scorePlayer1;
-                else {
-                    score += "-";
-                    tempScore = scorePlayer2;
-                }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
-            }
+            score = setScore(pointPlayer1) + "-" + setScore(pointPlayer2);
         }
         return score;
     }
 
-    private String SetPointDraw() {
+    private String setScore(int pointPlayer) {
         String score;
-        switch (scorePlayer1) {
+        switch (pointPlayer) {
             case 0:
-                score = "Love-All";
+                score = "Love";
                 break;
             case 1:
-                score = "Fifteen-All";
+                score = "Fifteen";
                 break;
             case 2:
-                score = "Thirty-All";
+                score = "Thirty";
                 break;
             default:
-                score = "Deuce";
+                score = "Forty";
                 break;
         }
         return score;
@@ -79,7 +62,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean advantageOrWin() {
-        return scorePlayer1 >= 4 || scorePlayer2 >= 4;
+        return pointPlayer1 >= 4 || pointPlayer2 >= 4;
     }
 
 }
