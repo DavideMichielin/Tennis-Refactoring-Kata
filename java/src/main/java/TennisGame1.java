@@ -26,14 +26,33 @@ public class TennisGame1 implements TennisGame {
             } else {
                 score = setScore(pointPlayer1) + "-All";
             }
-        } else if (advantageOrWin()) {
-            int minusResult = pointPlayer1 - pointPlayer2;
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
+        } else if (isAdvantageOrWin()) {
+            score = setAdvantageOrWin();
         } else {
             score = setScore(pointPlayer1) + "-" + setScore(pointPlayer2);
+        }
+        return score;
+    }
+
+    private String setAdvantageOrWin() {
+        String score;
+        int minusResult = pointPlayer1 - pointPlayer2;
+        if (minusResult > 0) {
+            switch (minusResult) {
+                case 1:
+                    score = "Advantage player1";
+                    break;
+                default:
+                    score = "Win for player1";
+            }
+        } else {
+            switch (minusResult) {
+                case -1:
+                    score = "Advantage player2";
+                    break;
+                default:
+                    score = "Win for player2";
+            }
         }
         return score;
     }
@@ -61,7 +80,7 @@ public class TennisGame1 implements TennisGame {
         return scorePlayer1 == scorePlayer2;
     }
 
-    private boolean advantageOrWin() {
+    private boolean isAdvantageOrWin() {
         return pointPlayer1 >= 4 || pointPlayer2 >= 4;
     }
 
